@@ -70,7 +70,7 @@ if subgrupo_selecionado != "All":
         'Total': 'sum'
     }).reset_index()
 
-    # Function to generate pie chart with Plotly
+    # criar gráficos pie
     def create_pie_chart(data, title):
         labels = ['Online', 'Offline', 'Nunca tocou']
         values = data[['Online', 'Offline', 'Nunca tocou']].values.tolist()
@@ -82,7 +82,7 @@ if subgrupo_selecionado != "All":
             'Nunca tocou': 'yellow'
         }
 
-        # Filter out labels with 0% values, but keep the original order
+        # filtro de valores de 0%
         filtered_labels = [label for label in labels if data[label] > 0]
         filtered_values = [data[label] for label in labels if data[label] > 0]
         colors = [color_map[label] for label in filtered_labels]
@@ -96,7 +96,7 @@ if subgrupo_selecionado != "All":
         fig.update_layout(title_text=title)
         return fig
 
-    # Create and display pie charts for each Subgrupo
+    # criar e mostrar o display
     for index, row in df_pie.iterrows():
         st.plotly_chart(create_pie_chart(row, f"Loja {row['Subgrupo']}"))
 
